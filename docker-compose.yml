@@ -4,7 +4,8 @@ services:
     container_name: bds-dashboard
     build: .
     ports:
-      - 19132:19132
+      - 19132:19132/udp
     restart: unless-stopped
     volumes:
-      - ./server:/server
+      - ./plugins:/servers/plugins
+      - ./worlds:/servers/worlds
