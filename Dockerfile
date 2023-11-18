@@ -1,7 +1,9 @@
 FROM debian
 
+WORKDIR /servers
+
 RUN apt-get update \
-    && apt-get install -y wget libcurl4 \
+   && apt-get install -y wget libcurl4 \
     && rm -rf /var/lib/apt/lists/*
 
 ENV LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu
@@ -11,10 +13,8 @@ RUN wget -O bds-down.tar.gz https://github.com/heaveless/bds-downloader/releases
     && rm bds-down.tar.gz \
     && chmod +x /usr/bin/bds-down
 
-WORKDIR /server
-
 RUN bds-down -y
 
-EXPOSE 19132
+EXPOSE 19132/udp
 
 ENTRYPOINT ["./bedrock_server"]
